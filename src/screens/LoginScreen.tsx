@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text } from 'react-native';
+import { View, TextInput, Button, Text,Image } from 'react-native';
 import { useAuth } from '../context/AuthContext';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase/firebase';
 import { useLinkTo, useNavigation } from '@react-navigation/native';
+import logo from '../../assets/logo-rio-on.png';
+import styles from './styles';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -26,30 +28,23 @@ const LoginScreen = () => {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', padding: 16 }}>
+    <View style={styles.container}>
+      <Image source={logo} style={styles.logotipo} />
       <TextInput
         placeholder="E-mail"
         value={email}
         onChangeText={setEmail}
-        style={{ height: 40, borderColor: '#ccc', borderWidth: 1, marginBottom: 8 }}
+        style={styles.inputText}
       />
       <TextInput
         placeholder="Senha"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
-        style={{ height: 40, borderColor: '#ccc', borderWidth: 1, marginBottom: 8 }}
+        style={styles.inputText}
       />
-      <Button title="Entrar" onPress={handleLogin} />
-      <Text
-        style={{
-          color: 'blue',
-          marginTop: 16,
-          textAlign: 'center',
-          textDecorationLine: 'underline',
-        }}
-        onPress={() => navigation.navigate('Register')} // Navegação para a tela de Registro
-      >
+      <Button title="Entrar" onPress={handleLogin}  />
+      <Text style={styles.linkbtn} onPress={() => navigation.navigate('Register')} >
         Criar uma conta
       </Text>
       {errorMessage ? <Text style={{ color: 'red', marginTop: 10 }}>{errorMessage}</Text> : null}
@@ -58,3 +53,4 @@ const LoginScreen = () => {
 };
 
 export default LoginScreen;
+

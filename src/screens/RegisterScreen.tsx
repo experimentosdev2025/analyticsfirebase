@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text } from 'react-native';
+import { View, TextInput, Button, Text,Image } from 'react-native';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase/firebase';
+import logo from '../../assets/logo-rio-on.png';
+import styles from './styles';
 
 const RegisterScreen = ({ navigation }: { navigation: any }) => {
   const [email, setEmail] = useState('');
@@ -18,19 +20,20 @@ const RegisterScreen = ({ navigation }: { navigation: any }) => {
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', padding: 16 }}>
+    <View style={styles.container}>
+      <Image source={logo} style={styles.logotipo} />
       <TextInput
         placeholder="E-mail"
         value={email}
         onChangeText={setEmail}
-        style={{ height: 40, borderColor: '#ccc', borderWidth: 1, marginBottom: 8 }}
+        style={styles.inputText}
       />
       <TextInput
         placeholder="Senha"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
-        style={{ height: 40, borderColor: '#ccc', borderWidth: 1, marginBottom: 8 }}
+        style={styles.inputText}
       />
       <Button title="Criar Conta" onPress={handleRegister} />
       {errorMessage ? <Text style={{ color: 'red', marginTop: 10 }}>{errorMessage}</Text> : null}
